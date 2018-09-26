@@ -49,7 +49,6 @@
 		},
 		created() {
 			this.getCategorie(this.$route.params.id)
-			console.log(this.$route.params.id)
 		},
 		methods: {
 			getCategorie: function(id) {
