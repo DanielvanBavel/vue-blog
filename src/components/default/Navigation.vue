@@ -2,17 +2,16 @@
 	<nav id="main-nav-wrap">
     	<ul class="main-navigation sf-menu">      
       		<li><router-link to="/">Home</router-link></li>   
-           
       		<li class="has-children">
-        		<span>{{ title }}</span>
-        		<ul class="sub-menu">
-              		<li v-for="categorie in categories">
-                		<router-link to="/categorie.name">{{ categorie.name }}</router-link>
-              		</li>
-           		</ul>
-      		</li>                  
-    	</ul>
-  	</nav>
+				<span>{{ title }}</span>
+				<ul class="sub-menu">
+					<li v-for="categorie in categories">
+						<router-link :to="`/${categorie.name}`">{{ categorie.name }}</router-link>
+					</li>
+				</ul>
+			</li>                  
+		</ul>
+	</nav>
 </template>
 
 <script>
