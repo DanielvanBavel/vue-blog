@@ -15,7 +15,7 @@ export default new VueRouter({
       	component: BlogComponent
     },
     {
-    	path: '/:category',
+    	path: '/:category/:id',
         name: 'blogcategory',
     	component: BlogCategory
     },

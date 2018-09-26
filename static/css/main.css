@@ -3283,3 +3283,7 @@ footer ul li {
 #cForm {
 	margin-top: 3.6rem;
 }
+
+li.has-children:hover > ul.sub-menu {
+	display: block;
+}

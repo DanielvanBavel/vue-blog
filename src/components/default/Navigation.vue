@@ -6,7 +6,7 @@
 				<span>{{ title }}</span>
 				<ul class="sub-menu">
 					<li v-for="categorie in categories">
-						<router-link :to="`/${categorie.name}`">{{ categorie.name }}</router-link>
+						<router-link :to="`/${categorie.name}/${categorie.id}`">{{ categorie.name }}</router-link>
 					</li>
 				</ul>
 			</li>                  

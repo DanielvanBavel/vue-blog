@@ -1,98 +1,66 @@
 <template>
-  <div id="blogcategory">
-	<section class="site-section pt-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
+	<div id="blogcategory">
+	   	<section id="page-header">
+		   	<div class="row current-cat">
+		   		<div class="col-full">
+		   			<h1>Category: {{categorie.name}}</h1>
+		   		</div>   		
+		   	</div>
+	   	</section>
 
-            <div class="owl-carousel owl-theme home-slider">
-              <div>
-                <a href="blog-single.html" class="a-block d-flex align-items-center height-lg" 
-                style="background-image: url('/../static/images/img_1.jpg'); ">
-                  <div class="text half-to-full">
-                    <div class="post-meta">
-                      <span class="category">Lifestyle</span>
-                      <span class="mr-2">March 15, 2018 </span> &bullet;
-                      <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                    </div>
-                    <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta eaque ipsa laudantium!</p>
-                  </div>
-                </a>
-              </div>
-              <div>
-                <a href="blog-single.html" class="a-block d-flex align-items-center height-lg" 
-                style="background-image: url('/../static/images/img_2.jpg'); ">
-                  <div class="text half-to-full">
-                    <div class="post-meta">
-                      <span class="category">Lifestyle</span>
-                      <span class="mr-2">March 15, 2018 </span> &bullet;
-                      <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                    </div>
-                    <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta eaque ipsa laudantium!</p>
-                  </div>
-                </a>
-              </div>
-              <div>
-                <a href="blog-single.html" class="a-block d-flex align-items-center height-lg" style="background-image: url('/../static/images/img_3.jpg'); ">
-                  <div class="text half-to-full">
-                    <div class="post-meta">
-                      <span class="category">Lifestyle</span>
-                      <span class="mr-2">March 15, 2018 </span> &bullet;
-                      <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                    </div>
-                    <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta eaque ipsa laudantium!</p>
-                  </div>
-                </a>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-4">
-            <a href="blog-single.html" class="a-block d-flex align-items-center height-md" style="background-image: url('/../static/images/img_2.jpg'); ">
-              <div class="text">
-                <div class="post-meta">
-                  <span class="category">Lifestyle</span>
-                  <span class="mr-2">March 15, 2018 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                </div>
-                <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <a href="blog-single.html" class="a-block d-flex align-items-center height-md" style="background-image: url('images/img_3.jpg'); ">
-              <div class="text">
-                <div class="post-meta">
-                  <span class="category">Travel</span>
-                  <span class="mr-2">March 15, 2018 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                </div>
-                <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <a href="blog-single.html" class="a-block d-flex align-items-center height-md" style="background-image: url('/../static/images/img_4.jpg'); ">
-              <div class="text">
-                <div class="post-meta">
-                  <span class="category">Food</span>
-                  <span class="mr-2">March 15, 2018 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                </div>
-                <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
+	   	<section id="bricks" class="with-top-sep">
+			<div class="row masonry">
+	        	<div class="bricks-wrapper">
+		         	<article v-for="post in categorie.posts" class="brick entry format-standard animate-this">
+		               	<div class="entry-thumb">
+			                <img :src="post.image" alt="">             
+		               	</div>
 
+		               	<div class="entry-text">
+			               	<div class="entry-header">
+			               		<div class="entry-meta">
+			               			<span class="cat-links">
+			               				<span>{{categorie.name}}</span>               				
+			               			</span>			
+			               		</div>
 
-    </section>
-    <!-- END section -->
-  </div>
+			               		<h1 class="entry-title"><a href="single-standard.html">{{post.title}}</a></h1>	               		
+			               	</div>
+							<div class="entry-excerpt">
+								{{post.introduction}}
+							</div>
+		               </div>
+					</article>
+				</div>
+			</div>
+		</section>
+	</div>
 </template>
+
+<script>
+	import axios from 'axios'
+
+	export default {
+		name: 'BlogCategory',
+		data() {
+			return {
+				categorie: [],
+			}
+		},
+		created() {
+			this.getCategorie(this.$route.params.id)
+			console.log(this.$route.params.id)
+		},
+		methods: {
+			getCategorie: function(id) {
+				axios.get('http://localhost:8000/api/v1/categorie/' + id, { crossdomain: true })
+				.then(response => {
+					this.categorie = response.data[0];
+				})
+				.catch(e => {
+					this.errors.push(e);
+				})
+			}			
+		}
+	}
+</script>
